@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Text, View,TouchableOpacity,TextInput,Alert,KeyboardAvoidingView,ToastAndroid } from 'react-native';
 import {Header} from 'react-native-elements';
-import db from '../conifig';
+import db from '../config';     
 
 
 export default class WriteStoryScreen extends React.Component{
