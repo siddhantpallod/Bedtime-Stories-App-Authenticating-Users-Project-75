@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StyleSheet, Text, View,ScrollView,TouchableOpacity } from 'react-native';
-import {SearchBar} from 'react-native-elements';
+import { StyleSheet, Text, View,ScrollView,TouchableOpacity,FlatList } from 'react-native';
+import {SearchBar,Header} from 'react-native-elements';
 import db from '../config'
 
 export default class ReadStoryScreen extends React.Component{
@@ -57,7 +57,8 @@ export default class ReadStoryScreen extends React.Component{
             containerStyle={{backgroundColor:'#03b898',borderBottomColor:'transparent',borderTopColor:'transparent'}}
             inputContainerStyle={{backgroundColor:'#ffffff', borderRadius: 50}}
             inputStyle={{color:'#000000'}}
-            onChangeText={(text)=>{this.filterSearch(text)}} value={this.state.search} />
+            onChangeText={(text)=>{this.filterSearch(text)}} 
+            value={this.state.search} />
     
             <ScrollView contentContainerStyle={{paddingBottom: 20}}>
               {this.state.search == ""
@@ -76,6 +77,21 @@ export default class ReadStoryScreen extends React.Component{
               <TouchableOpacity style={styles.submit} onPress={this.retriveStories}>
                 <Text style={styles.submitText}>Refresh</Text>
               </TouchableOpacity>
+
+              <FlatList 
+          data={this.state.dataSource}
+          extraData = {this.state.search}
+          renderItem={({item})=>(
+            <View style={{ height:50, width:350,  marginTop:5}}>
+              <Text>{"Title: " + item[0]}</Text>
+              <Text>{"Author: " + item[2].Author}</Text>
+            </View>
+          )}
+          keyExtractor= {(item, index)=> index.toString()}
+          onEndReached ={this.getStories}
+          onEndReachedThreshold={1}
+        />
+
             </ScrollView>
           </View>    
         );
