@@ -74,7 +74,8 @@ export default class ReadStoryScreen extends React.Component{
                   <Text style={styles.author}>Author: {data.author}</Text>
                 </View>))
               }
-              <TouchableOpacity style={styles.submit} onPress={this.retriveStories}>
+              <TouchableOpacity style={styles.submit} 
+              onPress={this.filterSearch('')}>
                 <Text style={styles.submitText}>Refresh</Text>
               </TouchableOpacity>
 
